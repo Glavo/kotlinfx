@@ -1,0 +1,11 @@
+rootProject.name = 'kotlinfx'
+
+include 'base', 'controls', 'fxml', 'graphics', 'media', 'swing', 'web'
+
+project(':base').name = 'kotlinfx-base'
+project(':controls').name = 'kotlinfx-controls'
+project(':fxml').name = 'kotlinfx-fxml'
+project(':graphics').name = 'kotlinfx-graphics'
+project(':media').name = 'kotlinfx-media'
+project(':swing').name = 'kotlinfx-swing'
+project(':web').name = 'kotlinfx-web'
