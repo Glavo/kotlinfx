@@ -4,7 +4,7 @@ import javafx.scene.Node
 import javafx.scene.text.Text
 import javafx.scene.text.TextFlow
 
-inline fun text(text: String = "", x: Double, y: Double, initializer: Text.() -> Unit = {}): Text {
+inline fun text(text: String = "", x: Double = 0.0, y: Double = 0.0, initializer: Text.() -> Unit = {}): Text {
     return Text(x, y, text).apply(initializer)
 }
 
