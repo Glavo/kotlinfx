@@ -39,7 +39,7 @@ inline fun <S, T> tableCell(initializer: TableCell<S, T>.() -> Unit = {}): Table
 }
 
 inline fun <S, T> tableColumn(text: String = "", initializer: TableColumn<S, T>.() -> Unit = {}): TableColumn<S, T> {
-    return TableColumn<S, T>().apply(initializer)
+    return TableColumn<S, T>(text).apply(initializer)
 }
 
 inline fun <T> tableRow(initializer: TableRow<T>.() -> Unit = {}): TableRow<T> {

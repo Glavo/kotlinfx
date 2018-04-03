@@ -6,4 +6,4 @@ import javafx.scene.PerspectiveCamera
 inline fun parallelCamera(initializer: ParallelCamera.() -> Unit = {}): ParallelCamera = ParallelCamera().apply(initializer)
 
 inline fun perspectiveCamera(fixedEyeAtCameraZero: Boolean = false, initializer: PerspectiveCamera.() -> Unit = {}): PerspectiveCamera =
-        PerspectiveCamera().apply(initializer)
+        PerspectiveCamera(fixedEyeAtCameraZero).apply(initializer)

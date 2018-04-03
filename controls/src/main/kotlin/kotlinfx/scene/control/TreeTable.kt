@@ -26,7 +26,7 @@ inline fun <S, T> treeTableCell(initializer: TreeTableCell<S, T>.() -> Unit = {}
 }
 
 inline fun <S, T> treeTreeTableColumn(text: String = "", initializer: TreeTableColumn<S, T>.() -> Unit = {}): TreeTableColumn<S, T> {
-    return TreeTableColumn<S, T>().apply(initializer)
+    return TreeTableColumn<S, T>(text).apply(initializer)
 }
 
 inline fun <T> treeTableRow(initializer: TreeTableRow<T>.() -> Unit = {}): TreeTableRow<T> {
