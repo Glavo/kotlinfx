@@ -95,3 +95,7 @@ inline fun checkMenuItem(text: String = "", graphic: Node? = null, initializer: 
 inline fun radioMenuItem(text: String = "", graphic: Node? = null, initializer: RadioMenuItem .() -> Unit = {}): RadioMenuItem {
     return RadioMenuItem(text, graphic).apply(initializer)
 }
+
+inline fun MenuItem.onAction(crossinline v: (ActionEvent) -> Unit) {
+    this.onAction = EventHandler { v(it) }
+}
