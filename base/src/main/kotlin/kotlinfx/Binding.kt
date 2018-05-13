@@ -25,6 +25,9 @@ inline fun Observable.createLongBinding(crossinline func: () -> Long): LongBindi
 inline fun <T> Observable.createObjectBinding(crossinline func: () -> T): ObjectBinding<T> =
         Bindings.createObjectBinding(Callable { func() }, this)
 
+inline fun Observable.createStringBinding(crossinline func: () -> String): StringBinding =
+        Bindings.createStringBinding(Callable { func() }, this)
+
 inline fun <T> select(root: ObservableValue<*>, vararg steps: String): ObjectBinding<T> =
         Bindings.select(root, *steps)
 
