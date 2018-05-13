@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package kotlinfx
 
 import javafx.beans.InvalidationListener
@@ -22,56 +24,56 @@ inline fun <T> ObservableValue<T>.onChange(
     }
 }
 
-operator fun ObservableBooleanValue.getValue(thisRef: Any?, property: KProperty<*>): Boolean {
+inline operator fun ObservableBooleanValue.getValue(thisRef: Any?, property: KProperty<*>): Boolean {
     return this.get()
 }
 
-operator fun ObservableFloatValue.getValue(thisRef: Any?, property: KProperty<*>): Float {
+inline operator fun ObservableFloatValue.getValue(thisRef: Any?, property: KProperty<*>): Float {
     return this.get()
 }
 
-operator fun ObservableDoubleValue.getValue(thisRef: Any?, property: KProperty<*>): Double {
+inline operator fun ObservableDoubleValue.getValue(thisRef: Any?, property: KProperty<*>): Double {
     return this.get()
 }
 
-operator fun ObservableIntegerValue.getValue(thisRef: Any?, property: KProperty<*>): Int {
+inline operator fun ObservableIntegerValue.getValue(thisRef: Any?, property: KProperty<*>): Int {
     return this.get()
 }
 
-operator fun ObservableLongValue.getValue(thisRef: Any?, property: KProperty<*>): Long {
+inline operator fun ObservableLongValue.getValue(thisRef: Any?, property: KProperty<*>): Long {
     return this.get()
 }
 
-operator fun ObservableNumberValue.getValue(thisRef: Any?, property: KProperty<*>): Number {
+inline operator fun ObservableNumberValue.getValue(thisRef: Any?, property: KProperty<*>): Number {
     return this.value
 }
 
 
-operator fun <T> ObservableObjectValue<T>.getValue(thisRef: Any?, property: KProperty<*>): T {
+inline operator fun <T> ObservableObjectValue<T>.getValue(thisRef: Any?, property: KProperty<*>): T {
     return this.get()
 }
 
 
-operator fun WritableBooleanValue.setValue(thisRef: Any?, property: KProperty<*>, value: Boolean) {
+inline operator fun WritableBooleanValue.setValue(thisRef: Any?, property: KProperty<*>, value: Boolean) {
     this.set(value)
 }
 
-operator fun WritableFloatValue.setValue(thisRef: Any?, property: KProperty<*>, value: Float) {
+inline operator fun WritableFloatValue.setValue(thisRef: Any?, property: KProperty<*>, value: Float) {
     this.set(value)
 }
 
-operator fun WritableDoubleValue.setValue(thisRef: Any?, property: KProperty<*>, value: Double) {
+inline operator fun WritableDoubleValue.setValue(thisRef: Any?, property: KProperty<*>, value: Double) {
     this.set(value)
 }
 
-operator fun WritableIntegerValue.setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
+inline operator fun WritableIntegerValue.setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
     this.set(value)
 }
 
-operator fun WritableLongValue.setValue(thisRef: Any?, property: KProperty<*>, value: Long) {
+inline operator fun WritableLongValue.setValue(thisRef: Any?, property: KProperty<*>, value: Long) {
     this.set(value)
 }
 
-operator fun <T> WritableObjectValue<T>.setValue(thisRef: Any?, property: KProperty<*>, value: T) {
+inline operator fun <T> WritableObjectValue<T>.setValue(thisRef: Any?, property: KProperty<*>, value: T) {
     this.set(value)
 }
