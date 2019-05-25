@@ -28,26 +28,26 @@ inline fun <T> Observable.createObjectBinding(crossinline func: () -> T): Object
 inline fun Observable.createStringBinding(crossinline func: () -> String): StringBinding =
         Bindings.createStringBinding(Callable { func() }, this)
 
-inline fun <T> select(root: ObservableValue<*>, vararg steps: String): ObjectBinding<T> =
-        Bindings.select(root, *steps)
+inline fun <T> ObservableValue<*>.select(vararg steps: String): ObjectBinding<T> =
+        Bindings.select(this, *steps)
 
-inline fun selectDouble(root: ObservableValue<*>, vararg steps: String): DoubleBinding =
-        Bindings.selectDouble(root, *steps)
+inline fun ObservableValue<*>.selectDouble(vararg steps: String): DoubleBinding =
+        Bindings.selectDouble(this, *steps)
 
-inline fun selectFloat(root: ObservableValue<*>, vararg steps: String): FloatBinding =
-        Bindings.selectFloat(root, *steps)
+inline fun ObservableValue<*>.selectFloat(vararg steps: String): FloatBinding =
+        Bindings.selectFloat(this, *steps)
 
-inline fun selectInteger(root: ObservableValue<*>, vararg steps: String): IntegerBinding =
-        Bindings.selectInteger(root, *steps)
+inline fun ObservableValue<*>.selectInteger(vararg steps: String): IntegerBinding =
+        Bindings.selectInteger(this, *steps)
 
-inline fun selectLong(root: ObservableValue<*>, vararg steps: String): LongBinding =
-        Bindings.selectLong(root, *steps)
+inline fun ObservableValue<*>.selectLong(vararg steps: String): LongBinding =
+        Bindings.selectLong(this, *steps)
 
-inline fun selectBoolean(root: ObservableValue<*>, vararg steps: String): BooleanBinding =
-        Bindings.selectBoolean(root, *steps)
+inline fun ObservableValue<*>.selectBoolean(vararg steps: String): BooleanBinding =
+        Bindings.selectBoolean(this, *steps)
 
-inline fun selectString(root: ObservableValue<*>, vararg steps: String): StringBinding =
-        Bindings.selectString(root, *steps)
+inline fun ObservableValue<*>.selectString(vararg steps: String): StringBinding =
+        Bindings.selectString(this, *steps)
 
 inline fun <T> select(root: Any, vararg steps: String): ObjectBinding<T> =
         Bindings.select(root, *steps)

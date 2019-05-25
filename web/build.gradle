@@ -1,0 +1,10 @@
+dependencies {
+    implementation javaFX("base")
+    implementation javaFX("controls")
+    implementation javaFX("graphics")
+    implementation javaFX("web")
+    java9Implementation javaFX("base")
+    java9Implementation javaFX("controls")
+    java9Implementation javaFX("graphics")
+    java9Implementation javaFX("web")
+}

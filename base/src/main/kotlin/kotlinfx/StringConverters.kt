@@ -2,6 +2,7 @@
 
 package kotlinfx
 
+import javafx.util.StringConverter
 import javafx.util.converter.*
 import java.text.*
 import java.time.chrono.*
@@ -51,8 +52,7 @@ object StringConverters {
             locale: Locale = Locale.getDefault(Locale.Category.FORMAT),
             dateStyle: Int = DateFormat.DEFAULT,
             timeStyle: Int = DateFormat.DEFAULT
-    ) =
-            DateTimeStringConverter(locale, dateStyle, timeStyle)
+    ) = DateTimeStringConverter(locale, dateStyle, timeStyle)
 
     inline fun ofDateTime(locale: Locale = Locale.getDefault(Locale.Category.FORMAT), pattern: String) =
             DateTimeStringConverter(locale, pattern)

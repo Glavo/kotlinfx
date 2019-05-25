@@ -1,44 +1,81 @@
 buildscript {
-    ext.kotlin_version = '1.2.41'
+    ext.kotlin_version = '1.3.31'
 
     repositories {
         mavenCentral()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gradle:osdetector-gradle-plugin:1.6.2'
     }
 }
 
 allprojects {
+    apply plugin: 'com.google.osdetector'
+    ext.openjfx_version = '11.0.2'
+
     group 'org.glavo'
-    version '0.1.5'
+    version '0.1.6'
+
+    switch (osdetector.os) {
+        case "linux":
+            ext.osName = "linux"
+            break
+        case "windows":
+            ext.osName = "win"
+            break
+        case "osx":
+            ext.osName = "mac"
+            break
+        default:
+            throw new UnsupportedOperationException()
+    }
+
+    ext.javaFX = { moduleName ->
+        return "org.openjfx:javafx-$moduleName:${openjfx_version}:${osName}"
+    }
 }
 
 subprojects {
     apply plugin: 'java'
     apply plugin: 'kotlin'
 
-    if (JavaVersion.current().isJava9Compatible()) {
-        sourceSets.main.java.srcDirs = ['src/main/java', 'src/main/module']
-        sourceSets.main.kotlin.srcDirs = ['src/main/module', 'src/main/java', 'src/main/kotlin']
-        sourceCompatibility = '9'
-        targetCompatibility = '9'
-
-        compileJava.configure {
-            dependsOn compileKotlin
-            destinationDir = compileKotlin.destinationDir
-            doFirst {
-                options.compilerArgs = ['--module-path', classpath.asPath,]
-                classpath = files()
+    sourceSets {
+        main {
+            kotlin {
+                srcDirs = ['src/main/module', 'src/main/kotlin']
             }
         }
-        jar.dependsOn compileJava
-    } else {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
+        java9 {
+            java {
+                srcDirs = ['src/main/module']
+            }
+        }
+    }
 
-        sourceSets.main.kotlin.srcDirs = ['src/main/java', 'src/main/kotlin']
-        sourceSets.main.java.srcDirs = ['src/main/java']
+    compileJava {
+        sourceCompatibility = 8
+        targetCompatibility = 8
+    }
+
+    compileJava9Java {
+        sourceCompatibility = 9
+        targetCompatibility = 9
+        doFirst {
+            options.compilerArgs = ['--module-path', classpath.asPath]
+        }
+    }
+
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = '1.8'   
+        }
+    }
+
+    compileTestKotlin {
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
     }
 
     repositories {
@@ -46,11 +83,19 @@ subprojects {
     }
 
     dependencies {
-        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
         testCompile group: 'junit', name: 'junit', version: '4.12'
+
+        java9Implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+        java9Implementation files(sourceSets.main.output.classesDirs) { builtBy compileJava }
     }
 
-    compileKotlin.kotlinOptions.jvmTarget = "1.8"
-
-    compileTestKotlin.kotlinOptions.jvmTarget = "1.8"
+    jar {
+        into('META-INF/versions/9') {
+            from sourceSets.java9.output
+        }
+        manifest.attributes(
+                'Multi-Release': 'true'
+        )
+    }
 }

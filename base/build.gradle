@@ -1,0 +1,4 @@
+dependencies {
+    implementation javaFX("base")
+    java9Implementation javaFX("base")
+}

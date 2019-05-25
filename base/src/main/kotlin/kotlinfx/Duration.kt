@@ -85,10 +85,6 @@ inline operator fun Duration.div(n: Double): Duration = this.divide(n)
 
 inline operator fun Duration.div(n: Int): Duration = this.divide(n.toDouble())
 
-inline operator fun Double.div(time: Duration): Duration = time.divide(this)
-
-inline operator fun Int.div(time: Duration): Duration = time.divide(this.toDouble())
-
 inline operator fun Duration.unaryMinus(): Duration = this.negate()
 
 inline operator fun Duration.unaryPlus(): Duration = this

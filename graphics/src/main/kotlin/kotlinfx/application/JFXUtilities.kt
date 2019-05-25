@@ -1,6 +1,7 @@
 package kotlinfx.application
 
 import javafx.application.*
+import javafx.beans.property.ReadOnlyBooleanProperty
 
 @Suppress("NOTHING_TO_INLINE")
 object JFXUtilities {
@@ -36,7 +37,7 @@ object JFXUtilities {
         inline get() = Platform.isAccessibilityActive()
 
     @JvmStatic
-    val accessibilityActiveProperty
+    val accessibilityActiveProperty: ReadOnlyBooleanProperty
         @JvmName("accessibilityActiveProperty")
         inline get() = Platform.accessibilityActiveProperty()
 }

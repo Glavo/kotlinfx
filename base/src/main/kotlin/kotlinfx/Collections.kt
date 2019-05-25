@@ -66,7 +66,7 @@ inline fun observableFloatArrayOf(vararg values: Float): ObservableFloatArray = 
 @JvmName("observableFloatArrayOfArray")
 inline fun observableFloatArrayOf(values: FloatArray): ObservableFloatArray = FXCollections.observableFloatArray(*values)
 
-inline fun FloatArray.toObservableFloatArray(): ObservableFloatArray = FXCollections.observableFloatArray(*this)
+inline fun FloatArray.observable(): ObservableFloatArray = FXCollections.observableFloatArray(*this)
 
 
 operator fun ObservableFloatArray.iterator(): Iterator<Float> = object : Iterator<Float> {
@@ -77,7 +77,7 @@ operator fun ObservableFloatArray.iterator(): Iterator<Float> = object : Iterato
     override fun next(): Float = try {
         this@iterator[idx++]
     } catch (e: ArrayIndexOutOfBoundsException) {
-        throw NoSuchElementException()
+        throw NoSuchElementException(e.message)
     }
 }
 
@@ -128,7 +128,7 @@ inline fun observableIntegerArrayOf(vararg values: Int): ObservableIntegerArray 
 @JvmName("observableIntegerArrayOfArray")
 inline fun observableIntegerArrayOf(values: IntArray): ObservableIntegerArray = FXCollections.observableIntegerArray(*values)
 
-inline fun IntArray.toObservableIntegerArray(): ObservableIntegerArray = FXCollections.observableIntegerArray(*this)
+inline fun IntArray.observable(): ObservableIntegerArray = FXCollections.observableIntegerArray(*this)
 
 
 operator fun ObservableIntegerArray.iterator(): Iterator<Int> = object : Iterator<Int> {
