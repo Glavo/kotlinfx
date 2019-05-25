@@ -21,10 +21,19 @@ inline fun <T : Application> KClass<T>.launch(vararg args: String) = Application
 @JvmName("launchWithArrayArgs")
 inline fun <T : Application> KClass<T>.launch(args: Array<out String>) = Application.launch(this.java, *args)
 
-fun Array<String>.runApp(
+fun runApp(
+        args: Array<String>,
         autoShow: Boolean? = null,
         onInit: (() -> Unit)? = null,
         onStop: (() -> Unit)? = null,
         stageInitializer: Stage.() -> Unit) {
-    App.run(this, autoShow, onInit, onStop, stageInitializer)
+    App.run(args, autoShow, onInit, onStop, stageInitializer)
+}
+
+fun runApp(
+        autoShow: Boolean? = null,
+        onInit: (() -> Unit)? = null,
+        onStop: (() -> Unit)? = null,
+        stageInitializer: Stage.() -> Unit) {
+    App.run(arrayOf(), autoShow, onInit, onStop, stageInitializer)
 }
