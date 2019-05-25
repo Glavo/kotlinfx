@@ -1,6 +1,6 @@
 dependencies {
-    implementation javaFX("graphics")
-    implementation javaFX("base")
-    java9Implementation javaFX("graphics")
-    java9Implementation javaFX("base")
+    compileOnly javaFX("graphics")
+    compileOnly javaFX("base")
+    java9CompileOnly javaFX("graphics")
+    java9CompileOnly javaFX("base")
 }

@@ -12,7 +12,7 @@ allprojects {
 }
 
 dependencies {
-    implementation 'org.glavo:kotlinfx:0.1.6'
+    compileOnly 'org.glavo:kotlinfx:0.1.7'
 }
 ```
 

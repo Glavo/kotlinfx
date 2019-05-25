@@ -15,7 +15,7 @@ allprojects {
     ext.openjfx_version = '11.0.2'
 
     group 'org.glavo'
-    version '0.1.6'
+    version '0.1.7'
 
     switch (osdetector.os) {
         case "linux":
@@ -47,6 +47,7 @@ subprojects {
             }
         }
         java9 {
+            compileClasspath += main.output
             java {
                 srcDirs = ['src/main/module']
             }
@@ -61,6 +62,7 @@ subprojects {
     compileJava9Java {
         sourceCompatibility = 9
         targetCompatibility = 9
+        dependsOn(compileKotlin)
         doFirst {
             options.compilerArgs = ['--module-path', classpath.asPath]
         }
@@ -86,8 +88,8 @@ subprojects {
         compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
         testCompile group: 'junit', name: 'junit', version: '4.12'
 
-        java9Implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-        java9Implementation files(sourceSets.main.output.classesDirs) { builtBy compileJava }
+        java9CompileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+        //java9CompileOnly files(sourceSets.main.output.classesDirs) { builtBy compileJava }
     }
 
     jar {

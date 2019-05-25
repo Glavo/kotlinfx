@@ -1,10 +1,10 @@
 dependencies {
-    implementation javaFX("base")
-    implementation javaFX("controls")
-    implementation javaFX("graphics")
-    implementation javaFX("web")
-    java9Implementation javaFX("base")
-    java9Implementation javaFX("controls")
-    java9Implementation javaFX("graphics")
-    java9Implementation javaFX("web")
+    compileOnly javaFX("base")
+    compileOnly javaFX("controls")
+    compileOnly javaFX("graphics")
+    compileOnly javaFX("web")
+    java9CompileOnly javaFX("base")
+    java9CompileOnly javaFX("controls")
+    java9CompileOnly javaFX("graphics")
+    java9CompileOnly javaFX("web")
 }

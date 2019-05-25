@@ -1,8 +1,8 @@
 dependencies {
-    implementation javaFX("base")
-    implementation javaFX("graphics")
-    implementation javaFX("media")
-    java9Implementation javaFX("base")
-    java9Implementation javaFX("graphics")
-    java9Implementation javaFX("media")
+    compileOnly javaFX("base")
+    compileOnly javaFX("graphics")
+    compileOnly javaFX("media")
+    java9CompileOnly javaFX("base")
+    java9CompileOnly javaFX("graphics")
+    java9CompileOnly javaFX("media")
 }
