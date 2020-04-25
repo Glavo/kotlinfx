@@ -1,9 +1,10 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package kotlinfx.application
 
 import javafx.application.*
 import javafx.beans.property.ReadOnlyBooleanProperty
 
-@Suppress("NOTHING_TO_INLINE")
 object JFXUtilities {
 
     @JvmStatic

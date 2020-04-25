@@ -1,18 +1,26 @@
 # KotlinFX
 
+[![Build Status](https://travis-ci.com/kala-projects/kotlinfx.svg?branch=master)](https://travis-ci.com/kala-projects/kotlinfx)
 
 ## Getting Started
 
-To add a dependency using Gradle:
+First, you need to add the jcenter repository to your build:
+
+Gradle:
 ```groovy
 allprojects {
     repositories {
         maven { url 'https://jitpack.io' }
     }
 }
+```
 
+Then add dependencies:
+
+Gradle:
+```groovy
 dependencies {
-    compileOnly 'org.glavo:kotlinfx:0.1.7'
+    implementation group: 'asia.kala', name: 'kotlinfx', version: '0.2.0'
 }
 ```
 

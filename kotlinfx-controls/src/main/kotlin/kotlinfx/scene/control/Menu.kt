@@ -88,11 +88,11 @@ inline fun separatorMenuItem(initializer: SeparatorMenuItem.() -> Unit = {}): Se
     return SeparatorMenuItem().apply(initializer)
 }
 
-inline fun checkMenuItem(text: String = "", graphic: Node? = null, initializer: CheckMenuItem .() -> Unit = {}): CheckMenuItem {
+inline fun checkMenuItem(text: String = "", graphic: Node? = null, initializer: CheckMenuItem.() -> Unit = {}): CheckMenuItem {
     return CheckMenuItem(text, graphic).apply(initializer)
 }
 
-inline fun radioMenuItem(text: String = "", graphic: Node? = null, initializer: RadioMenuItem .() -> Unit = {}): RadioMenuItem {
+inline fun radioMenuItem(text: String = "", graphic: Node? = null, initializer: RadioMenuItem.() -> Unit = {}): RadioMenuItem {
     return RadioMenuItem(text, graphic).apply(initializer)
 }
 
