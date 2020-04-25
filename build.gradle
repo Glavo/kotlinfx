@@ -1,80 +1,27 @@
 buildscript {
-    ext.kotlin_version = '1.3.31'
+    ext.kotlin_version = '1.3.72'
 
     repositories {
         mavenCentral()
+        maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.gradle:osdetector-gradle-plugin:1.6.2'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
     }
 }
 
 allprojects {
-    apply plugin: 'com.google.osdetector'
-    ext.openjfx_version = '11.0.2'
+    group 'asia.kala'
+    version '0.2.0-SNAPSHOT'
 
-    group 'org.glavo'
-    version '0.1.7'
-
-    switch (osdetector.os) {
-        case "linux":
-            ext.osName = "linux"
-            break
-        case "windows":
-            ext.osName = "win"
-            break
-        case "osx":
-            ext.osName = "mac"
-            break
-        default:
-            throw new UnsupportedOperationException()
-    }
-
-    ext.javaFX = { moduleName ->
-        return "org.openjfx:javafx-$moduleName:${openjfx_version}:${osName}"
-    }
+    apply plugin: 'java-library'
 }
 
 subprojects {
-    apply plugin: 'java'
     apply plugin: 'kotlin'
 
-    sourceSets {
-        main {
-            kotlin {
-                srcDirs = ['src/main/module', 'src/main/kotlin']
-            }
-        }
-        java9 {
-            compileClasspath += main.output
-            java {
-                srcDirs = ['src/main/module']
-            }
-        }
-    }
-
-    compileJava {
-        sourceCompatibility = 8
-        targetCompatibility = 8
-    }
-
-    compileJava9Java {
-        sourceCompatibility = 9
-        targetCompatibility = 9
-        dependsOn(compileKotlin)
-        doFirst {
-            options.compilerArgs = ['--module-path', classpath.asPath]
-        }
-    }
-
     compileKotlin {
-        kotlinOptions {
-            jvmTarget = '1.8'   
-        }
-    }
-
-    compileTestKotlin {
         kotlinOptions {
             jvmTarget = '1.8'
         }
@@ -85,19 +32,76 @@ subprojects {
     }
 
     dependencies {
-        compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-        testCompile group: 'junit', name: 'junit', version: '4.12'
-
-        java9CompileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-        //java9CompileOnly files(sourceSets.main.output.classesDirs) { builtBy compileJava }
+        compileOnly group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: kotlin_version
     }
 
-    jar {
-        into('META-INF/versions/9') {
-            from sourceSets.java9.output
+    rootProject.dependencies {
+        api project
+    }
+}
+
+
+allprojects {
+    apply plugin: 'maven-publish'
+    apply plugin: 'com.jfrog.bintray'
+
+    task sourcesJar(type: Jar) {
+        from sourceSets.main.allSource
+        archiveClassifier = 'sources'
+    }
+
+    publishing {
+        publications {
+            Kala(MavenPublication) {
+                from components.java
+
+                artifact sourcesJar
+
+                pom {
+                    name = project.name
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'glavo'
+                            name = 'Glavo'
+                            email = 'zjx001202@gmail.com'
+                        }
+                    }
+                }
+            }
         }
-        manifest.attributes(
-                'Multi-Release': 'true'
-        )
+    }
+
+    bintray {
+        user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+        key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+        publications = ['Kala']
+        pkg {
+            repo = 'maven'
+            name = project.name
+            licenses = ['Apache-2.0']
+            publicDownloadNumbers = true
+            vcsUrl = 'https://github.com/kala-projects/kotlinfx.git'
+            version {
+                name = project.version
+                desc = "${project.name} ${project.version}"
+                vcsTag = project.version
+            }
+        }
+    }
+
+    tasks.withType(GenerateModuleMetadata) {
+        enabled = false
+    }
+
+    task travisPublish() {}
+
+    if (!project.version.toString().endsWith("SHAPSHOT")) {
+        travisPublish.dependsOn(bintrayUpload)
     }
 }

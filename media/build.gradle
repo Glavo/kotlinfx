@@ -1,8 +1,0 @@
-dependencies {
-    compileOnly javaFX("base")
-    compileOnly javaFX("graphics")
-    compileOnly javaFX("media")
-    java9CompileOnly javaFX("base")
-    java9CompileOnly javaFX("graphics")
-    java9CompileOnly javaFX("media")
-}

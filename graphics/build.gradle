@@ -1,6 +1,0 @@
-dependencies {
-    compileOnly javaFX("graphics")
-    compileOnly javaFX("base")
-    java9CompileOnly javaFX("graphics")
-    java9CompileOnly javaFX("base")
-}
