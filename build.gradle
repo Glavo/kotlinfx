@@ -98,10 +98,4 @@ allprojects {
     tasks.withType(GenerateModuleMetadata) {
         enabled = false
     }
-
-    task travisPublish() {}
-
-    if (!project.version.toString().endsWith("SHAPSHOT")) {
-        travisPublish.dependsOn(bintrayUpload)
-    }
 }
