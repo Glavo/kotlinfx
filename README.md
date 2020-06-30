@@ -1,6 +1,6 @@
 # KotlinFX
 
-[![Build Status](https://travis-ci.com/kala-projects/kotlinfx.svg?branch=master)](https://travis-ci.com/kala-projects/kotlinfx)
+[![Build Status](https://travis-ci.com/Glavo/kotlinfx.svg?branch=master)](https://travis-ci.com/kala-projects/kotlinfx)
 
 ## Getting Started
 
