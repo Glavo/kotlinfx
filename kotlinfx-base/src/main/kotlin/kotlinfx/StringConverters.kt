@@ -34,7 +34,7 @@ object StringConverters {
     inline fun <T> ofFormat(format: Format) = FormatStringConverter<T>(format)
 
 
-    inline fun ofCurrencyr(locale: Locale = Locale.getDefault(), pattern: String? = null) =
+    inline fun ofCurrency(locale: Locale = Locale.getDefault(), pattern: String? = null) =
             CurrencyStringConverter(locale, pattern)
 
     inline fun ofCurrency(numberFormat: NumberFormat) =
