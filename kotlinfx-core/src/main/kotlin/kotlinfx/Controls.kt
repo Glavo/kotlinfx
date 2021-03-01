@@ -127,11 +127,11 @@ inline fun <T> choiceBox(items: Array<out T>, initializer: ChoiceBox<T>.() -> Un
 }
 
 inline fun <T> choiceBox(items: Collection<T>, initializer: ChoiceBox<T>.() -> Unit = {}): ChoiceBox<T> {
-    return ChoiceBox(items.toList().observable()).apply(initializer)
+    return ChoiceBox(items.toList().asObservableList()).apply(initializer)
 }
 
 inline fun <T> choiceBox(items: List<T>, initializer: ChoiceBox<T>.() -> Unit = {}): ChoiceBox<T> {
-    return ChoiceBox(items.observable()).apply(initializer)
+    return ChoiceBox(items.asObservableList()).apply(initializer)
 }
 
 inline fun <T> choiceBox(items: ObservableList<T>, initializer: ChoiceBox<T>.() -> Unit = {}): ChoiceBox<T> {

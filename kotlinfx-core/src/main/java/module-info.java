@@ -6,4 +6,5 @@ module kotlinfx.core {
     requires transitive javafx.controls;
 
     exports kotlinfx;
+    opens kotlinfx to javafx.graphics;
 }

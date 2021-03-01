@@ -15,6 +15,8 @@ allprojects {
     version '0.3.0-SHAPSHOT'
 
     apply plugin: 'java-library'
+    apply plugin: 'kotlin'
+    apply plugin: 'org.openjfx.javafxplugin'
 
     java {
         modularity.inferModulePath.set(true)
@@ -36,19 +38,14 @@ allprojects {
             rf.close()
         }
     }
-}
-
-subprojects {
-    apply plugin: 'kotlin'
-    apply plugin: 'org.openjfx.javafxplugin'
-
-    javafx {
-        version = '11.0.2'
-        modules = ['javafx.base', 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', 'javafx.swing', 'javafx.web']
-        configuration = "compileOnly"
-    }
 
     compileKotlin {
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
+    }
+
+    compileTestKotlin {
         kotlinOptions {
             jvmTarget = '1.8'
         }
@@ -60,6 +57,15 @@ subprojects {
 
     dependencies {
         compileOnly group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlinVersion
+        testImplementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: kotlinVersion
+    }
+}
+
+subprojects {
+    javafx {
+        version = '11.0.2'
+        modules = ['javafx.base', 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', 'javafx.swing', 'javafx.web']
+        configuration = "compileOnly"
     }
 
     rootProject.dependencies {
@@ -106,4 +112,10 @@ allprojects {
     tasks.withType(GenerateModuleMetadata) {
         enabled = false
     }
+}
+
+javafx {
+    version = '11.0.2'
+    modules = ['javafx.base', 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', 'javafx.swing', 'javafx.web']
+    configuration = "testImplementation"
 }

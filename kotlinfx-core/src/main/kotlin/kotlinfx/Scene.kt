@@ -1,7 +1,5 @@
 package kotlinfx
 
-import javafx.scene.*
-
 typealias Scene = javafx.scene.Scene
 typealias SubScene = javafx.scene.SubScene
 typealias SceneAntialiasing = javafx.scene.SceneAntialiasing
