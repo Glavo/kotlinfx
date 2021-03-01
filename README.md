@@ -54,9 +54,9 @@ fun main() = launchApp {
 or use `App`:
 
 ```kotlin
-object MyApp : App {
+object MyApp : App() {
     override fun start(primaryStage: Stage) {
-        primaryStage.apply {
+        with(primaryStage) {
             title = "Hello KotlinFX"
             width = 600.0
             height = 450.0
@@ -76,6 +76,7 @@ object MyApp : App {
                 }
             }
         }
+        primaryStage.show()
     }
 
     @JvmStatic

@@ -6,7 +6,7 @@ abstract class App {
     companion object {
         private val lock = Object()
 
-        class Helper : JFXApplication() {
+        internal class Helper : JFXApplication() {
             init {
                 if (helperIsInitialized) {
                     throw IllegalStateException()

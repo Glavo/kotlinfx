@@ -9,7 +9,7 @@ typealias SwingNode = javafx.embed.swing.SwingNode
 typealias JFXPanel = javafx.embed.swing.JFXPanel
 
 /**
- * Embed a Swing content to [javafx.scene.Node].
+ * Embed a Swing content to a [javafx.scene.Node].
  *
  * Usage:
  * ```kotlin
@@ -27,6 +27,9 @@ fun JComponent.asJFXNode(): SwingNode {
     return SwingNode().also { node -> SwingUtilities.invokeLater { node.content = this } }
 }
 
+/**
+ * Embed a JavaFX [Node][javafx.scene.Node] to a [JComponent].
+ */
 fun Scene.asSwingPanel(): JFXPanel {
     return JFXPanel().also { panel -> Platform.runLater { panel.scene = this } }
 }

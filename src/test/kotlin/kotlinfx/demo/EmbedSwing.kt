@@ -1,4 +1,4 @@
-package org.glavo.kotlinfx.test
+package kotlinfx.demo
 
 import kotlinfx.*
 import kotlinfx.swing.*
