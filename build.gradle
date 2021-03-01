@@ -1,21 +1,41 @@
 buildscript {
-    ext.kotlin_version = '1.4.30'
-
+    ext.kotlinVersion = "1.4.31"
     repositories {
         mavenCentral()
-        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'org.openjfx:javafx-plugin:0.0.9'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.openjfx:javafx-plugin:0.0.9"
     }
 }
 
 allprojects {
     group 'org.glavo'
-    version '1.0.0-SHAPSHOT'
+    version '0.3.0-SHAPSHOT'
 
     apply plugin: 'java-library'
+
+    java {
+        modularity.inferModulePath.set(true)
+    }
+
+    compileJava {
+        sourceCompatibility = 9
+        targetCompatibility = 9
+    }
+
+    compileJava.doLast {
+        FileTree tree = fileTree('build/classes/java/main')
+        tree.include '**/*.class'
+        tree.exclude 'module-info.class'
+        tree.each {
+            RandomAccessFile rf = new RandomAccessFile(it, "rw")
+            rf.seek(7)   // major version
+            rf.write(52) // java 8
+            rf.close()
+        }
+    }
 }
 
 subprojects {
@@ -39,7 +59,7 @@ subprojects {
     }
 
     dependencies {
-        compileOnly group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version
+        compileOnly group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlinVersion
     }
 
     rootProject.dependencies {
@@ -53,7 +73,7 @@ allprojects {
 
     task sourcesJar(type: Jar) {
         from sourceSets.main.allSource
-        archiveClassifier = 'sources'
+        archiveClassifier.set('sources')
     }
 
     publishing {

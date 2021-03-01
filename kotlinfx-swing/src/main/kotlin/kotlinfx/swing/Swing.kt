@@ -1,20 +1,17 @@
 package kotlinfx.swing
 
 import javafx.application.Platform
-import javafx.embed.swing.JFXPanel
-import javafx.embed.swing.SwingNode
 import javafx.scene.Scene
 import javax.swing.JComponent
 import javax.swing.SwingUtilities
 
+typealias SwingNode = javafx.embed.swing.SwingNode
+typealias JFXPanel = javafx.embed.swing.JFXPanel
+
 fun JComponent.asJFXNode(): SwingNode {
-    val node = SwingNode()
-    SwingUtilities.invokeLater { node.content = this }
-    return node
+    return SwingNode().also { node -> SwingUtilities.invokeLater { node.content = this } }
 }
 
 fun Scene.asSwingPanel(): JFXPanel {
-    val panel = JFXPanel()
-    Platform.runLater { panel.scene = this }
-    return panel
+    return JFXPanel().also { panel -> Platform.runLater { panel.scene = this } }
 }

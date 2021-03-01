@@ -1,9 +1,9 @@
-rootProject.name = 'kotlinfx'
+rootProject.name = "kotlinfx"
 
-include 'kotlinfx-base',
-        'kotlinfx-controls',
-        'kotlinfx-fxml',
-        'kotlinfx-graphics',
-        'kotlinfx-media',
-        'kotlinfx-swing',
-        'kotlinfx-web'
+include(
+        "kotlinfx-core",
+        "kotlinfx-fxml",
+        "kotlinfx-media",
+        "kotlinfx-swing",
+        "kotlinfx-web"
+)
